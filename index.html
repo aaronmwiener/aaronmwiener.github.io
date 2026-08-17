@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aaron Wiener — Reporter, Editor, Author</title>
+<meta name="description" content="Aaron Wiener is an award-winning reporter, editor, and author based in Berlin. Former Berlin bureau chief of the Washington Post.">
+
+<!-- ===== Social sharing preview. Replace the URL below once the site is live. ===== -->
+<meta property="og:title" content="Aaron Wiener">
+<meta property="og:description" content="Reporter, editor, and author based in Berlin.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aaronmwiener.com">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Newsreader:opsz,wght@6..72,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#FBFBF9;
+  --ink:#14171C;
+  --muted:#6A7179;
+  --rule:#DEDDD6;
+  --accent:#1F4E5F;
+  --accent-soft:#E4EDEF;
+
+  --display:"Fraunces",Georgia,serif;
+  --body:"Newsreader",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:19px;
+  line-height:1.62;
+  font-weight:350;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{max-width:44rem;margin:0 auto;padding:0 1.6rem}
+
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(31,78,95,.28);transition:border-color .15s,background-color .15s}
+a:hover{border-bottom-color:var(--accent);background:var(--accent-soft)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* ---------- Masthead ---------- */
+.masthead{padding:4.5rem 0 0}
+.name{
+  font-family:var(--display);
+  font-optical-sizing:auto;
+  font-weight:600;
+  font-size:clamp(2.6rem,7vw,3.9rem);
+  line-height:1.02;
+  letter-spacing:-.02em;
+  margin:0;
+}
+.tagline{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin:1.1rem 0 0;
+}
+
+/* ---------- Navigation ---------- */
+nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(251,251,249,.94);
+  backdrop-filter:saturate(180%) blur(8px);
+  border-bottom:1px solid var(--rule);
+  margin-top:2.6rem;
+}
+nav ul{
+  display:flex;flex-wrap:wrap;gap:1.6rem;
+  list-style:none;margin:0 auto;padding:.95rem 1.6rem;
+  max-width:44rem;
+}
+nav a{
+  font-family:var(--mono);
+  font-size:.73rem;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  color:var(--ink);
+  border-bottom:none;
+}
+nav a:hover{background:none;color:var(--accent)}
+
+/* ---------- Sections ---------- */
+section{padding:3.8rem 0;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:none}
+
+h2{
+  font-family:var(--mono);
+  font-size:.73rem;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin:0 0 1.8rem;
+}
+
+p{margin:0 0 1.15rem}
+p:last-child{margin-bottom:0}
+
+.lede{font-size:1.12rem}
+
+/* ---------- Portrait ---------- */
+.portrait{
+  float:right;
+  width:11.5rem;
+  margin:.3rem 0 1.4rem 1.8rem;
+  border-radius:2px;
+}
+.portrait img{width:100%;height:auto;display:block;border-radius:2px}
+.portrait figcaption{
+  font-family:var(--mono);font-size:.66rem;color:var(--muted);
+  margin-top:.5rem;letter-spacing:.04em;
+}
+.photo-missing{
+  border:1px dashed var(--rule);background:#F2F2EE;
+  aspect-ratio:9/13;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:1rem;
+  font-family:var(--mono);font-size:.65rem;color:var(--muted);line-height:1.5;
+}
+@media(max-width:34rem){
+  .portrait{float:none;width:9rem;margin:0 0 1.6rem}
+}
+
+/* ---------- Book ---------- */
+.book-title{
+  font-family:var(--display);
+  font-weight:600;font-size:2.5rem;line-height:1.08;
+  letter-spacing:-.015em;margin:0 0 .55rem;
+  text-transform:none;color:var(--ink);
+}
+.book-meta{
+  font-family:var(--mono);font-size:.74rem;color:var(--muted);
+  letter-spacing:.05em;margin:0 0 1.6rem;line-height:1.7;
+}
+
+/* ---------- Clips ---------- */
+.clips{list-style:none;margin:0;padding:0}
+.clip{padding:1.15rem 0;border-top:1px solid var(--rule)}
+.clip:first-child{border-top:none;padding-top:0}
+.clip-meta{
+  font-family:var(--mono);font-size:.68rem;
+  letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:.55rem;align-items:baseline;
+  margin-bottom:.3rem;
+}
+.clip-meta > span:first-child{
+  color:var(--ink);
+  font-weight:500;
+}
+.clip-meta > span:first-child::after{
+  content:" \2014";
+  color:var(--muted);
+  font-weight:400;
+}
+.lang{
+  border:1px solid var(--rule);border-radius:2px;
+  padding:.05rem .34rem;font-size:.6rem;letter-spacing:.09em;
+}
+.clip-title{
+  font-family:var(--body);font-size:1.06rem;font-weight:400;
+  line-height:1.4;margin:0;
+}
+.clip-title a{border-bottom-color:transparent}
+.clip-title a:hover{border-bottom-color:var(--accent)}
+.byline-note{color:var(--muted);font-size:.9rem}
+
+/* ---------- Awards ---------- */
+.awards{list-style:none;margin:0;padding:0}
+.award{
+  display:grid;grid-template-columns:3.6rem 1fr;gap:1.1rem;
+  padding:.9rem 0;border-top:1px solid var(--rule);
+}
+.award:first-child{border-top:none;padding-top:0}
+.award-year{
+  font-family:var(--mono);font-size:.78rem;color:var(--muted);
+  padding-top:.28rem;
+}
+.award-body{font-size:1rem;line-height:1.5}
+.award-body strong{font-weight:500}
+@media(max-width:34rem){
+  .award{grid-template-columns:1fr;gap:.15rem}
+  .award-year{padding-top:0}
+}
+
+/* ---------- Contact ---------- */
+.contact-list{list-style:none;margin:0;padding:0}
+.contact-list li{
+  display:grid;grid-template-columns:8.5rem 1fr;gap:1rem;
+  padding:.62rem 0;border-top:1px solid var(--rule);
+  align-items:baseline;
+}
+.contact-list li:first-child{border-top:none;padding-top:0}
+.contact-label{
+  font-family:var(--mono);font-size:.68rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+}
+@media(max-width:34rem){
+  .contact-list li{grid-template-columns:1fr;gap:.1rem}
+}
+
+footer{
+  padding:3rem 0 4rem;
+  font-family:var(--mono);font-size:.68rem;
+  letter-spacing:.07em;color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <h1 class="name">Aaron Wiener</h1>
+    <p class="tagline">Reporter &middot; Editor &middot; Author &middot; Berlin</p>
+  </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#book">The Book</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about">
+  <h2>About</h2>
+
+  <figure class="portrait">
+    <!-- Drop a file named photo.jpg next to index.html and this appears automatically.
+         Portrait orientation works best (roughly 4:5). -->
+    <img src="photo.jpg" alt="Aaron Wiener"
+         onerror="this.outerHTML='&lt;div class=&quot;photo-missing&quot;&gt;ADD photo.jpg&lt;br&gt;NEXT TO index.html&lt;/div&gt;'">
+    <figcaption>Jörg Schifferer</figcaption>
+  </figure>
+
+  <p class="lede">Aaron Wiener is an award-winning reporter, editor, and author. Until February 2026, he was the Berlin bureau chief of the Washington Post, where he had previously served as a reporter and editor in Washington, D.C.</p>
+
+  <p>He has worked at and written for Mother Jones, the Los Angeles Times, the Economist, Washington City Paper, and the Washington Independent (RIP). He has been part of Pulitzer Prize&ndash;winning and finalist teams. His writing focuses on the fault lines of democracy running across the Atlantic and how power dynamics in the US and Europe shape politics, media, and society.</p>
+
+  <p>Aaron is based in Berlin and makes frequent radio, television, and live-event appearances in both English and German.</p>
+</section>
+
+<!-- ============================================================
+     THE BOOK  —  edit this section as news firms up
+     ============================================================ -->
+<section id="book">
+  <h2 class="book-title">Post Mortem</h2>
+
+  <p class="book-meta">
+    German edition: Goldmann Verlag, an imprint of Penguin Random House (March 2027)<br>
+    English edition: publisher to be announced
+  </p>
+
+  <p>Aaron's first book is forthcoming in both English and German. It's about billionaires and the media &ndash; how the ultra-rich, initially seen as saviors when they bought up struggling publications, ended up subornating their news outlets to their own financial and political interests, with pretty disastrous results for journalism and democracy.</p>
+
+  <p>The central narrative focuses on the Washington Post under Jeff Bezos, but Donald Trump, the Ellisons, and Los Angeles Times owner Patrick Soon-Shiong are all major characters, as are Europe's increasingly powerful media barons.</p>
+
+  <p>If this sounds interesting, stay tuned for more details and preorder links.</p>
+</section>
+
+<!-- ============================================================
+     WRITING
+     To add a clip, copy one <li class="clip"> block and change
+     the outlet, date, language tag, headline, and URL.
+     ============================================================ -->
+<section id="writing">
+  <h2>Selected Writing</h2>
+
+  <p style="margin-bottom:2.2rem;color:var(--muted);font-size:1rem">
+    Stories about media, politics, transatlantic relations, Nazis, bratwurst, and more.
+  </p>
+
+  <ul class="clips">
+
+    <li class="clip">
+      <div class="clip-meta"><span>Republik</span><span>6 March 2026</span><span class="lang">DE</span></div>
+      <p class="clip-title"><a href="https://www.republik.ch/2026/03/06/was-der-fall-washington-post-fuer-den-journalismus-bedeutet">Was der Fall «Washington Post» für den Journalismus bedeutet</a></p>
+    </li>
+
+    <li class="clip">
+      <div class="clip-meta"><span>Der Tagesspiegel</span><span>14 February 2026</span><span class="lang">DE</span></div>
+      <p class="clip-title"><a href="https://www.tagesspiegel.de/kultur/entlassungen-bei-der-washington-post-donald-trump-gewinnt-seinen-krieg-gegen-die-medien-15248247.html">„Donald Trump gewinnt seinen Krieg gegen die Medien"</a></p>
+    </li>
+
+    <li class="clip">
+      <div class="clip-meta"><span>The Washington Post</span><span>26 January 2026</span><span class="lang">EN</span></div>
+      <p class="clip-title"><a href="https://www.washingtonpost.com/world/2026/01/26/germany-trump-nato-greenland/">After 80-year bond, Germans find breaking up with U.S. is hard to do</a></p>
+    </li>
+
+    <li class="clip">
+      <div class="clip-meta"><span>The Washington Post</span><span>20 January 2026</span><span class="lang">EN</span></div>
+      <p class="clip-title"><a href="https://www.washingtonpost.com/world/2026/01/20/luften-open-windows-house-burping/">Lüften, German obsession with open windows, sparks 'house burping' trend</a></p>
+    </li>
+
+    <li class="clip">
+      <div class="clip-meta"><span>The Washington Post</span><span>11 December 2025</span><span class="lang">EN</span></div>
+      <p class="clip-title"><a href="https://www.washingtonpost.com/world/2025/12/11/afd-germany-trump-alliance-maga/">Germany's anti-immigrant AfD party finds open door in Trump's America</a></p>
+      <p class="byline-note">With Kate Brady</p>
+    </li>
+
+    <li class="clip">
+      <div class="clip-meta"><span>The Washington Post</span><span>11 October 2025</span><span class="lang">EN</span></div>
+      <p class="clip-title"><a href="https://www.washingtonpost.com/world/2025/10/11/germany-nonalcoholic-beer-sales-boom/">Germany, where beer is sacred, now leads world in nonalcoholic brews</a></p>
+    </li>
+
+    <li class="clip">
+      <div class="clip-meta"><span>The Washington Post</span><span>30 September 2025</span><span class="lang">EN</span></div>
+      <p class="clip-title"><a href="https://www.washingtonpost.com/world/2025/09/30/germany-oldest-bratwurst-sausage-boxing/">In Germany, a boxing match decides fight over birthplace of bratwurst</a></p>
+    </li>
+
+    <li class="clip">
+      <div class="clip-meta"><span>The Washington Post</span><span>5 August 2025</span><span class="lang">EN</span></div>
+      <p class="clip-title"><a href="https://www.washingtonpost.com/world/2025/08/05/germany-trains-delays-broken-railroad/">Germany's identity crisis: The trains no longer run on time</a></p>
+    </li>
+
+    <li class="clip">
+      <div class="clip-meta"><span>The Washington Post</span><span>13 March 2025</span><span class="lang">EN</span></div>
+      <p class="clip-title"><a href="https://www.washingtonpost.com/dc-md-va/2025/03/13/federal-workers-return-to-office-trump-confusion/">Federal workers called back to the office &mdash; or is it a shuttered Subway?</a></p>
+      <p class="byline-note">With Hannah Natanson</p>
+    </li>
+
+    <li class="clip">
+      <div class="clip-meta"><span>The Washington Post</span><span>15 February 2025</span><span class="lang">EN</span></div>
+      <p class="clip-title"><a href="https://www.washingtonpost.com/dc-md-va/2025/02/15/return-to-office-mandate-trump-desks/">Federal return-to-office mandate breeds chaos, confusion &mdash; and coin flips</a></p>
+    </li>
+
+    <li class="clip">
+      <div class="clip-meta"><span>Mother Jones</span><span>29 December 2016</span><span class="lang">EN</span></div>
+      <p class="clip-title"><a href="https://www.motherjones.com/politics/2016/12/hawaii-micronesia-migration-homeless-climate-change/">America's Real Migrant Crisis Is the One You've Never Heard Of</a></p>
+    </li>
+
+    <li class="clip">
+      <div class="clip-meta"><span>Washington City Paper</span><span>14 March 2014</span><span class="lang">EN</span></div>
+      <p class="clip-title"><a href="https://washingtoncitypaper.com/article/205165/no-place-like-home/">No Place Like Home</a></p>
+    </li>
+
+  </ul>
+</section>
+
+<!-- ============================================================
+     AWARDS
+     ============================================================ -->
+<section id="awards">
+  <h2>Awards &amp; Recognition</h2>
+
+  <ul class="awards">
+
+    <li class="award">
+      <div class="award-year">2026</div>
+      <div class="award-body"><strong>Pulitzer Prize for Public Service.</strong> A small part of a big reporting team that won for coverage of Donald Trump's assault on the federal workforce.</div>
+    </li>
+
+    <li class="award">
+      <div class="award-year">2026</div>
+      <div class="award-body"><strong>Arthur F. Burns Prize</strong> for reporting on links between the Trump administration and Germany's far-right Alternative for Germany party.</div>
+    </li>
+
+    <li class="award">
+      <div class="award-year">2024</div>
+      <div class="award-body"><strong>Pulitzer Prize finalist</strong>, Illustrated Reporting and Commentary. Co-editor of an investigation into the Smithsonian's collection of human remains.</div>
+    </li>
+
+    <li class="award">
+      <div class="award-year">2015</div>
+      <div class="award-body"><strong>Association of Alternative Newsmedia Award</strong> for beat reporting.</div>
+    </li>
+
+    <li class="award">
+      <div class="award-year">2014</div>
+      <div class="award-body"><strong>Association of Alternative Newsmedia Award</strong> for blogging.</div>
+    </li>
+
+    <li class="award">
+      <div class="award-year">2011</div>
+      <div class="award-body"><strong>Arthur F. Burns Prize</strong> for reporting on Germany's rushed energy transition.</div>
+    </li>
+
+  </ul>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section id="contact">
+  <h2>Contact</h2>
+
+  <p style="margin-bottom:2rem">For freelance writing projects, media engagements, public speaking, book ideas, or random chitchat:</p>
+
+  <ul class="contact-list">
+    <li>
+      <span class="contact-label">Email</span>
+      <span><a href="mailto:aaron.m.wiener@gmail.com">aaron.m.wiener@gmail.com</a></span>
+    </li>
+    <li>
+      <span class="contact-label">Signal</span>
+      <span>@aaronwiener.37</span>
+    </li>
+    <li>
+      <span class="contact-label">German agent</span>
+      <span>Thomas Schmoll &middot; <a href="mailto:tommy.schmoll.buero@gmail.com">tommy.schmoll.buero@gmail.com</a></span>
+    </li>
+    <li>
+      <span class="contact-label">U.S. agent</span>
+      <span>Anna Sproul-Latimer, Neon Literary &middot; <a href="mailto:anna@neonliterary.com">anna@neonliterary.com</a></span>
+    </li>
+    <li>
+      <span class="contact-label">Bluesky</span>
+      <span><a href="https://bsky.app/profile/aaronwiener.bsky.social">@aaronwiener.bsky.social</a></span>
+    </li>
+    <li>
+      <span class="contact-label">X</span>
+      <span><a href="https://x.com/aaronwiener">@aaronwiener</a></span>
+    </li>
+  </ul>
+</section>
+
+</main>
+
+<footer class="wrap">
+  &copy; <span id="year">2026</span> Aaron Wiener
+</footer>
+
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+
+</body>
+</html>
