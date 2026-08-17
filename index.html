@@ -45,7 +45,9 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-.wrap{max-width:44rem;margin:0 auto;padding:0 1.6rem}
+.wrap{max-width:58rem;margin:0 auto;padding:0 1.9rem}
+.measure{max-width:37rem}
+.measure-wide{max-width:46rem}
 
 a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(31,78,95,.28);transition:border-color .15s,background-color .15s}
 a:hover{border-bottom-color:var(--accent);background:var(--accent-soft)}
@@ -82,7 +84,7 @@ nav{
 nav ul{
   display:flex;flex-wrap:wrap;gap:1.6rem;
   list-style:none;margin:0 auto;padding:.95rem 1.6rem;
-  max-width:44rem;
+  max-width:58rem;
 }
 nav a{
   font-family:var(--mono);
@@ -113,17 +115,18 @@ p:last-child{margin-bottom:0}
 
 .lede{font-size:1.12rem}
 
-/* ---------- Portrait ---------- */
-.portrait{
-  float:right;
-  width:11.5rem;
-  margin:.3rem 0 1.4rem 1.8rem;
-  border-radius:2px;
+/* ---------- About layout & portrait ---------- */
+.about-grid{
+  display:grid;
+  grid-template-columns:22rem 1fr;
+  gap:3.2rem;
+  align-items:start;
 }
+.portrait{margin:0}
 .portrait img{width:100%;height:auto;display:block;border-radius:2px}
 .portrait figcaption{
-  font-family:var(--mono);font-size:.66rem;color:var(--muted);
-  margin-top:.5rem;letter-spacing:.04em;
+  font-family:var(--mono);font-size:.62rem;font-style:italic;
+  color:var(--muted);margin-top:.6rem;letter-spacing:.03em;
 }
 .photo-missing{
   border:1px dashed var(--rule);background:#F2F2EE;
@@ -131,17 +134,12 @@ p:last-child{margin-bottom:0}
   text-align:center;padding:1rem;
   font-family:var(--mono);font-size:.65rem;color:var(--muted);line-height:1.5;
 }
-@media(max-width:34rem){
-  .portrait{float:none;width:9rem;margin:0 0 1.6rem}
+@media(max-width:56rem){
+  .about-grid{grid-template-columns:1fr;gap:2rem}
+  .portrait{max-width:24rem}
 }
 
 /* ---------- Book ---------- */
-.book-title{
-  font-family:var(--display);
-  font-weight:600;font-size:2.5rem;line-height:1.08;
-  letter-spacing:-.015em;margin:0 0 .55rem;
-  text-transform:none;color:var(--ink);
-}
 .book-meta{
   font-family:var(--mono);font-size:.74rem;color:var(--muted);
   letter-spacing:.05em;margin:0 0 1.6rem;line-height:1.7;
@@ -226,7 +224,7 @@ footer{
 <header class="masthead">
   <div class="wrap">
     <h1 class="name">Aaron Wiener</h1>
-    <p class="tagline">Reporter &middot; Editor &middot; Author &middot; Berlin</p>
+    <p class="tagline">Reporter &middot; Editor &middot; Author</p>
   </div>
 </header>
 
@@ -248,26 +246,32 @@ footer{
 <section id="about">
   <h2>About</h2>
 
-  <figure class="portrait">
-    <!-- Drop a file named photo.jpg next to index.html and this appears automatically.
-         Portrait orientation works best (roughly 4:5). -->
-    <img src="photo.jpg" alt="Aaron Wiener"
-         onerror="this.outerHTML='&lt;div class=&quot;photo-missing&quot;&gt;ADD photo.jpg&lt;br&gt;NEXT TO index.html&lt;/div&gt;'">
-    <figcaption>Jörg Schifferer</figcaption>
-  </figure>
+  <div class="about-grid">
+
+    <figure class="portrait">
+      <!-- Replace photo.jpg to change the portrait. Portrait orientation works best. -->
+      <img src="photo.jpg" alt="Aaron Wiener"
+           onerror="this.outerHTML='&lt;div class=&quot;photo-missing&quot;&gt;ADD photo.jpg&lt;br&gt;NEXT TO index.html&lt;/div&gt;'">
+      <figcaption>Photo by Jörg Schifferer</figcaption>
+    </figure>
+
+    <div class="about-text">
 
   <p class="lede">Aaron Wiener is an award-winning reporter, editor, and author. Until February 2026, he was the Berlin bureau chief of the Washington Post, where he had previously served as a reporter and editor in Washington, D.C.</p>
 
   <p>He has worked at and written for Mother Jones, the Los Angeles Times, the Economist, Washington City Paper, and the Washington Independent (RIP). He has been part of Pulitzer Prize&ndash;winning and finalist teams. His writing focuses on the fault lines of democracy running across the Atlantic and how power dynamics in the US and Europe shape politics, media, and society.</p>
 
   <p>Aaron is based in Berlin and makes frequent radio, television, and live-event appearances in both English and German.</p>
+
+    </div>
+  </div>
 </section>
 
 <!-- ============================================================
      THE BOOK  —  edit this section as news firms up
      ============================================================ -->
-<section id="book">
-  <h2 class="book-title">Post Mortem</h2>
+<section id="book" class="measure">
+  <h2>Post Mortem</h2>
 
   <p class="book-meta">
     German edition: Goldmann Verlag, an imprint of Penguin Random House (March 2027)<br>
@@ -289,11 +293,11 @@ footer{
 <section id="writing">
   <h2>Selected Writing</h2>
 
-  <p style="margin-bottom:2.2rem;color:var(--muted);font-size:1rem">
+  <p class="measure" style="margin-bottom:2.2rem;color:var(--muted);font-size:1rem">
     Stories about media, politics, transatlantic relations, Nazis, bratwurst, and more.
   </p>
 
-  <ul class="clips">
+  <ul class="clips measure-wide">
 
     <li class="clip">
       <div class="clip-meta"><span>Republik</span><span>6 March 2026</span><span class="lang">DE</span></div>
@@ -366,7 +370,7 @@ footer{
 <section id="awards">
   <h2>Awards &amp; Recognition</h2>
 
-  <ul class="awards">
+  <ul class="awards measure-wide">
 
     <li class="award">
       <div class="award-year">2026</div>
@@ -407,9 +411,9 @@ footer{
 <section id="contact">
   <h2>Contact</h2>
 
-  <p style="margin-bottom:2rem">For freelance writing projects, media engagements, public speaking, book ideas, or random chitchat:</p>
+  <p class="measure" style="margin-bottom:2rem">For freelance writing projects, media engagements, public speaking, book ideas, or random chitchat:</p>
 
-  <ul class="contact-list">
+  <ul class="contact-list measure-wide">
     <li>
       <span class="contact-label">Email</span>
       <span><a href="mailto:aaron.m.wiener@gmail.com">aaron.m.wiener@gmail.com</a></span>
