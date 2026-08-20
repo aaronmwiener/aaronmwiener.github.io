@@ -12,6 +12,11 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aaronmwiener.com">
 
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:image" content="https://aaronmwiener.com/photo.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Newsreader:opsz,wght@6..72,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -22,8 +27,8 @@
   --ink:#14171C;
   --muted:#6A7179;
   --rule:#DEDDD6;
-  --accent:#1F4E5F;
-  --accent-soft:#E4EDEF;
+  --accent:#B55E32;
+  --accent-soft:#F7EAE1;
 
   --display:"Fraunces",Georgia,serif;
   --body:"Newsreader",Georgia,serif;
@@ -49,7 +54,7 @@ body{
 .measure{max-width:37rem}
 .measure-wide{max-width:46rem}
 
-a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(31,78,95,.28);transition:border-color .15s,background-color .15s}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(181,94,50,.30);transition:border-color .15s,background-color .15s}
 a:hover{border-bottom-color:var(--accent);background:var(--accent-soft)}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
 
@@ -75,6 +80,13 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
   letter-spacing:-.02em;
   margin:0;
 }
+.name a{
+  color:inherit;
+  border-bottom:none;
+  background:none;
+  text-decoration:none;
+}
+.name a:hover{color:inherit;background:none;border-bottom:none}
 .tagline{
   font-family:var(--mono);
   font-size:.7rem;
@@ -269,7 +281,7 @@ html[data-lang="de"] li.lang-de{display:grid}
   <div class="wrap masthead-inner">
 
     <div class="identity">
-      <h1 class="name">Aaron Wiener</h1>
+      <h1 class="name"><a href="/" aria-label="Back to homepage">Aaron Wiener</a></h1>
       <p class="tagline"><span class="lang-en">Reporter &middot; Editor &middot; Author</span><span class="lang-de">Reporter &middot; Redakteur &middot; Autor</span></p>
     </div>
 
