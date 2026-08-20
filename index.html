@@ -58,11 +58,33 @@ a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(181,94,5
 a:hover{border-bottom-color:var(--accent);background:var(--accent-soft)}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
 
+/* ---------- Sticky top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:20;
+  background:rgba(251,251,249,.93);
+  backdrop-filter:saturate(180%) blur(10px);
+  -webkit-backdrop-filter:saturate(180%) blur(10px);
+  transition:box-shadow .2s;
+}
+.topbar.compact{box-shadow:0 1px 10px rgba(20,23,28,.06)}
+
 /* ---------- Masthead + navigation (one line) ---------- */
 .masthead{
   padding:.9rem 0 1.6rem;
   border-bottom:1px solid var(--rule);
+  transition:padding .2s;
 }
+.topbar.compact .masthead{padding:.35rem 0 .8rem}
+.topbar.compact .lang-toggle{padding-top:.7rem}
+.topbar.compact .name{font-size:1.45rem}
+.topbar.compact .tagline{
+  opacity:0;height:0;margin:0;overflow:hidden;
+}
+.name,.tagline,.lang-toggle{transition:font-size .2s,opacity .2s,padding .2s,margin .2s}
+
+/* keep anchored sections clear of the pinned bar */
+section{scroll-margin-top:7.5rem}
+.topbar.compact ~ main section{scroll-margin-top:5rem}
 .masthead-inner{
   display:flex;
   align-items:baseline;
@@ -273,6 +295,8 @@ html[data-lang="de"] li.lang-de{display:grid}
 
 <body>
 
+<div class="topbar" id="topbar">
+
 <div class="wrap lang-toggle">
   <button class="lang-btn" data-set-lang="en" aria-current="true">EN</button><span class="lang-sep">|</span><button class="lang-btn" data-set-lang="de" aria-current="false">DE</button>
 </div>
@@ -297,6 +321,8 @@ html[data-lang="de"] li.lang-de{display:grid}
 
   </div>
 </header>
+
+</div><!-- /topbar -->
 
 <main class="wrap">
 
@@ -504,6 +530,15 @@ html[data-lang="de"] li.lang-de{display:grid}
 
 <script>
 document.getElementById('year').textContent=new Date().getFullYear();
+
+(function(){
+  var bar=document.getElementById('topbar'), ticking=false;
+  function upd(){ bar.classList.toggle('compact', window.scrollY > 90); ticking=false; }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking=true; window.requestAnimationFrame(upd); }
+  }, {passive:true});
+  upd();
+})();
 
 (function(){
   var root=document.documentElement;
