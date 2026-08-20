@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,48 +53,54 @@ a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(31,78,95
 a:hover{border-bottom-color:var(--accent);background:var(--accent-soft)}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
 
-/* ---------- Masthead ---------- */
-.masthead{padding:4.5rem 0 0}
+/* ---------- Masthead + navigation (one line) ---------- */
+.masthead{
+  padding:.9rem 0 1.6rem;
+  border-bottom:1px solid var(--rule);
+}
+.masthead-inner{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:2.5rem;
+  flex-wrap:wrap;
+}
+.identity{flex:0 0 auto}
 .name{
   font-family:var(--display);
   font-optical-sizing:auto;
   font-weight:600;
-  font-size:clamp(2.6rem,7vw,3.9rem);
+  font-size:clamp(2.1rem,4.6vw,2.9rem);
   line-height:1.02;
   letter-spacing:-.02em;
   margin:0;
 }
 .tagline{
   font-family:var(--mono);
-  font-size:.72rem;
+  font-size:.7rem;
   letter-spacing:.14em;
   text-transform:uppercase;
   color:var(--muted);
-  margin:1.1rem 0 0;
+  margin:.7rem 0 0;
 }
-
-/* ---------- Navigation ---------- */
-nav{
-  position:sticky;top:0;z-index:10;
-  background:rgba(251,251,249,.94);
-  backdrop-filter:saturate(180%) blur(8px);
-  border-bottom:1px solid var(--rule);
-  margin-top:2.6rem;
-}
+nav{flex:0 1 auto}
 nav ul{
-  display:flex;flex-wrap:wrap;gap:1.6rem;
-  list-style:none;margin:0 auto;padding:.95rem 1.6rem;
-  max-width:58rem;
+  display:flex;flex-wrap:wrap;gap:1.5rem;
+  list-style:none;margin:0;padding:0;
 }
 nav a{
   font-family:var(--mono);
-  font-size:.73rem;
+  font-size:.75rem;
   letter-spacing:.11em;
   text-transform:uppercase;
   color:var(--ink);
   border-bottom:none;
 }
 nav a:hover{background:none;color:var(--accent)}
+@media(max-width:44rem){
+  .masthead-inner{gap:1.6rem}
+  nav ul{gap:1.1rem}
+}
 
 /* ---------- Sections ---------- */
 section{padding:3.8rem 0;border-bottom:1px solid var(--rule)}
@@ -102,12 +108,12 @@ section:last-of-type{border-bottom:none}
 
 h2{
   font-family:var(--mono);
-  font-size:.73rem;
+  font-size:1.1rem;
   font-weight:500;
-  letter-spacing:.16em;
+  letter-spacing:.11em;
   text-transform:uppercase;
   color:var(--muted);
-  margin:0 0 1.8rem;
+  margin:0 0 2rem;
 }
 
 p{margin:0 0 1.15rem}
@@ -118,11 +124,12 @@ p:last-child{margin-bottom:0}
 /* ---------- About layout & portrait ---------- */
 .about-grid{
   display:grid;
-  grid-template-columns:22rem 1fr;
+  grid-template-columns:1fr 22rem;
   gap:3.2rem;
   align-items:start;
 }
-.portrait{margin:0}
+.portrait{margin:0;grid-column:2;grid-row:1}
+.about-text{grid-column:1;grid-row:1}
 .portrait img{width:100%;height:auto;display:block;border-radius:2px}
 .portrait figcaption{
   font-family:var(--mono);font-size:.62rem;font-style:italic;
@@ -136,7 +143,8 @@ p:last-child{margin-bottom:0}
 }
 @media(max-width:56rem){
   .about-grid{grid-template-columns:1fr;gap:2rem}
-  .portrait{max-width:24rem}
+  .portrait{grid-column:1;grid-row:1;max-width:24rem}
+  .about-text{grid-column:1;grid-row:2}
 }
 
 /* ---------- Book ---------- */
@@ -216,27 +224,67 @@ footer{
   font-family:var(--mono);font-size:.68rem;
   letter-spacing:.07em;color:var(--muted);
 }
+
+/* ---------- Language switching ---------- */
+html[data-lang="en"] .lang-de{display:none !important}
+html[data-lang="de"] .lang-en{display:none !important}
+html[data-lang="de"] li.lang-de{display:grid}
+
+.lang-toggle{
+  text-align:right;
+  font-family:var(--mono);
+  font-size:.75rem;
+  letter-spacing:.11em;
+  padding-top:1.6rem;
+}
+.lang-btn{
+  background:none;border:none;padding:0 .1rem;cursor:pointer;
+  font:inherit;letter-spacing:inherit;color:var(--muted);
+  text-transform:uppercase;
+}
+.lang-btn:hover{color:var(--accent)}
+.lang-btn[aria-current="true"]{color:var(--ink);font-weight:500}
+.lang-sep{color:var(--rule);padding:0 .35rem}
 </style>
+<script>
+/* Sets the language before the page paints, so there is no flash of both. */
+(function(){
+  var saved=null;
+  try{saved=localStorage.getItem('aw-lang')}catch(e){}
+  var nav=(navigator.language||navigator.userLanguage||'en').toLowerCase();
+  var l = saved || (nav.indexOf('de')===0 ? 'de' : 'en');
+  document.documentElement.setAttribute('data-lang', l);
+  document.documentElement.setAttribute('lang', l);
+})();
+</script>
 </head>
 
 <body>
 
+<div class="wrap lang-toggle">
+  <button class="lang-btn" data-set-lang="en" aria-current="true">EN</button><span class="lang-sep">|</span><button class="lang-btn" data-set-lang="de" aria-current="false">DE</button>
+</div>
+
 <header class="masthead">
-  <div class="wrap">
-    <h1 class="name">Aaron Wiener</h1>
-    <p class="tagline">Reporter &middot; Editor &middot; Author</p>
+  <div class="wrap masthead-inner">
+
+    <div class="identity">
+      <h1 class="name">Aaron Wiener</h1>
+      <p class="tagline"><span class="lang-en">Reporter &middot; Editor &middot; Author</span><span class="lang-de">Reporter &middot; Redakteur &middot; Autor</span></p>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="#about"><span class="lang-en">About</span><span class="lang-de">&Uuml;ber mich</span></a></li>
+        <li><a href="#book"><span class="lang-en">The Book</span><span class="lang-de">Das Buch</span></a></li>
+        <li><a href="#writing"><span class="lang-en">Writing</span><span class="lang-de">Texte</span></a></li>
+        <li><a href="#awards"><span class="lang-en">Awards</span><span class="lang-de">Auszeichnungen</span></a></li>
+        <li><a href="#contact"><span class="lang-en">Contact</span><span class="lang-de">Kontakt</span></a></li>
+      </ul>
+    </nav>
+
   </div>
 </header>
-
-<nav>
-  <ul>
-    <li><a href="#about">About</a></li>
-    <li><a href="#book">The Book</a></li>
-    <li><a href="#writing">Writing</a></li>
-    <li><a href="#awards">Awards</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
 
 <main class="wrap">
 
@@ -244,7 +292,7 @@ footer{
      ABOUT
      ============================================================ -->
 <section id="about">
-  <h2>About</h2>
+  <h2><span class="lang-en">About</span><span class="lang-de">&Uuml;ber mich</span></h2>
 
   <div class="about-grid">
 
@@ -252,16 +300,19 @@ footer{
       <!-- Replace photo.jpg to change the portrait. Portrait orientation works best. -->
       <img src="photo.jpg" alt="Aaron Wiener"
            onerror="this.outerHTML='&lt;div class=&quot;photo-missing&quot;&gt;ADD photo.jpg&lt;br&gt;NEXT TO index.html&lt;/div&gt;'">
-      <figcaption>Photo by Jörg Schifferer</figcaption>
+      <figcaption><span class="lang-en">Photo by Jörg Schifferer</span><span class="lang-de">Foto: Jörg Schifferer</span></figcaption>
     </figure>
 
     <div class="about-text">
 
-  <p class="lede">Aaron Wiener is an award-winning reporter, editor, and author. Until February 2026, he was the Berlin bureau chief of the Washington Post, where he had previously served as a reporter and editor in Washington, D.C.</p>
+  <p class="lede lang-en">Aaron Wiener is an award-winning reporter, editor, and author. Until February 2026, he was the Berlin bureau chief of the Washington Post, where he had previously served as a reporter and editor in Washington, D.C.</p>
+  <p class="lede lang-de">Aaron Wiener ist ein preisgekr&ouml;nter Reporter, Redakteur und Autor. Bis Februar 2026 leitete er das Berliner B&uuml;ro der Washington Post, zuvor arbeitete er dort als Reporter und Redakteur in Washington, D.C.</p>
 
-  <p>He has worked at and written for Mother Jones, the Los Angeles Times, the Economist, Washington City Paper, and the Washington Independent (RIP). He has been part of Pulitzer Prize&ndash;winning and finalist teams. His writing focuses on the fault lines of democracy running across the Atlantic and how power dynamics in the US and Europe shape politics, media, and society.</p>
+  <p class="lang-en">He has worked at and written for Mother Jones, the Los Angeles Times, the Economist, Washington City Paper, and the Washington Independent (RIP). He has been part of Pulitzer Prize&ndash;winning and finalist teams. His writing focuses on the fault lines of democracy running across the Atlantic and how power dynamics in the US and Europe shape politics, media, and society.</p>
+  <p class="lang-de">Er hat f&uuml;r Mother Jones, die Los Angeles Times, den Economist, das Washington City Paper und den Washington Independent (R.I.P.) gearbeitet und geschrieben. Er war Teil von Teams, die den Pulitzer-Preis gewonnen haben oder daf&uuml;r nominiert waren. In seiner Arbeit geht es um die Bruchlinien der Demokratie, die quer &uuml;ber den Atlantik verlaufen, und darum, wie Machtverh&auml;ltnisse in den USA und in Europa Politik, Medien und Gesellschaft pr&auml;gen.</p>
 
-  <p>Aaron is based in Berlin and makes frequent radio, television, and live-event appearances in both English and German.</p>
+  <p class="lang-en">Aaron is based in Berlin and makes frequent radio, television, and live-event appearances in both English and German.</p>
+  <p class="lang-de">Aaron lebt in Berlin und ist regelm&auml;&szlig;ig in H&ouml;rfunk und Fernsehen sowie bei Live-Veranstaltungen zu Gast &ndash; auf Englisch und auf Deutsch.</p>
 
     </div>
   </div>
@@ -271,18 +322,10 @@ footer{
      THE BOOK  —  edit this section as news firms up
      ============================================================ -->
 <section id="book" class="measure">
-  <h2>Post Mortem</h2>
+  <h2><span class="lang-en">The Book</span><span class="lang-de">Das Buch</span></h2>
 
-  <p class="book-meta">
-    German edition: Goldmann Verlag, an imprint of Penguin Random House (March 2027)<br>
-    English edition: publisher to be announced
-  </p>
-
-  <p>Aaron's first book is forthcoming in both English and German. It's about billionaires and the media &ndash; how the ultra-rich, initially seen as saviors when they bought up struggling publications, ended up subornating their news outlets to their own financial and political interests, with pretty disastrous results for journalism and democracy.</p>
-
-  <p>The central narrative focuses on the Washington Post under Jeff Bezos, but Donald Trump, the Ellisons, and Los Angeles Times owner Patrick Soon-Shiong are all major characters, as are Europe's increasingly powerful media barons.</p>
-
-  <p>If this sounds interesting, stay tuned for more details and preorder links.</p>
+  <p class="lang-en">Aaron is working on a book about billionaires and the media, and the state of press freedom in the United States and Europe. It will be published this spring in Germany by Goldmann Verlag, a Penguin Random House imprint. Stay tuned for more details.</p>
+  <p class="lang-de">Aaron arbeitet an einem Buch &uuml;ber Milliard&auml;re und die Medien und &uuml;ber den Zustand der Pressefreiheit in den USA und in Europa. Es erscheint im kommenden Fr&uuml;hjahr in Deutschland bei Goldmann, einem Imprint von Penguin Random House. Weitere Details folgen.</p>
 </section>
 
 <!-- ============================================================
@@ -291,73 +334,73 @@ footer{
      the outlet, date, language tag, headline, and URL.
      ============================================================ -->
 <section id="writing">
-  <h2>Selected Writing</h2>
+  <h2><span class="lang-en">Selected Writing</span><span class="lang-de">Ausgew&auml;hlte Texte</span></h2>
 
   <p class="measure" style="margin-bottom:2.2rem;color:var(--muted);font-size:1rem">
-    Stories about media, politics, transatlantic relations, Nazis, bratwurst, and more.
+    <span class="lang-en">Stories about media, politics, transatlantic relations, Nazis, bratwurst, and more.</span><span class="lang-de">Texte &uuml;ber Medien, Politik, transatlantische Beziehungen, Nazis, Bratwurst und mehr.</span>
   </p>
 
   <ul class="clips measure-wide">
 
     <li class="clip">
-      <div class="clip-meta"><span>Republik</span><span>6 March 2026</span><span class="lang">DE</span></div>
+      <div class="clip-meta"><span>Republik</span><span class="lang-en">6 March 2026</span><span class="lang-de">6. M&auml;rz 2026</span><span class="lang">DE</span></div>
       <p class="clip-title"><a href="https://www.republik.ch/2026/03/06/was-der-fall-washington-post-fuer-den-journalismus-bedeutet">Was der Fall «Washington Post» für den Journalismus bedeutet</a></p>
     </li>
 
     <li class="clip">
-      <div class="clip-meta"><span>Der Tagesspiegel</span><span>14 February 2026</span><span class="lang">DE</span></div>
+      <div class="clip-meta"><span>Der Tagesspiegel</span><span class="lang-en">14 February 2026</span><span class="lang-de">14. Februar 2026</span><span class="lang">DE</span></div>
       <p class="clip-title"><a href="https://www.tagesspiegel.de/kultur/entlassungen-bei-der-washington-post-donald-trump-gewinnt-seinen-krieg-gegen-die-medien-15248247.html">„Donald Trump gewinnt seinen Krieg gegen die Medien"</a></p>
     </li>
 
     <li class="clip">
-      <div class="clip-meta"><span>The Washington Post</span><span>26 January 2026</span><span class="lang">EN</span></div>
+      <div class="clip-meta"><span>The Washington Post</span><span class="lang-en">26 January 2026</span><span class="lang-de">26. Januar 2026</span><span class="lang">EN</span></div>
       <p class="clip-title"><a href="https://www.washingtonpost.com/world/2026/01/26/germany-trump-nato-greenland/">After 80-year bond, Germans find breaking up with U.S. is hard to do</a></p>
     </li>
 
     <li class="clip">
-      <div class="clip-meta"><span>The Washington Post</span><span>20 January 2026</span><span class="lang">EN</span></div>
+      <div class="clip-meta"><span>The Washington Post</span><span class="lang-en">20 January 2026</span><span class="lang-de">20. Januar 2026</span><span class="lang">EN</span></div>
       <p class="clip-title"><a href="https://www.washingtonpost.com/world/2026/01/20/luften-open-windows-house-burping/">Lüften, German obsession with open windows, sparks 'house burping' trend</a></p>
     </li>
 
     <li class="clip">
-      <div class="clip-meta"><span>The Washington Post</span><span>11 December 2025</span><span class="lang">EN</span></div>
+      <div class="clip-meta"><span>The Washington Post</span><span class="lang-en">11 December 2025</span><span class="lang-de">11. Dezember 2025</span><span class="lang">EN</span></div>
       <p class="clip-title"><a href="https://www.washingtonpost.com/world/2025/12/11/afd-germany-trump-alliance-maga/">Germany's anti-immigrant AfD party finds open door in Trump's America</a></p>
-      <p class="byline-note">With Kate Brady</p>
+      <p class="byline-note"><span class="lang-en">With Kate Brady</span><span class="lang-de">Mit Kate Brady</span></p>
     </li>
 
     <li class="clip">
-      <div class="clip-meta"><span>The Washington Post</span><span>11 October 2025</span><span class="lang">EN</span></div>
+      <div class="clip-meta"><span>The Washington Post</span><span class="lang-en">11 October 2025</span><span class="lang-de">11. Oktober 2025</span><span class="lang">EN</span></div>
       <p class="clip-title"><a href="https://www.washingtonpost.com/world/2025/10/11/germany-nonalcoholic-beer-sales-boom/">Germany, where beer is sacred, now leads world in nonalcoholic brews</a></p>
     </li>
 
     <li class="clip">
-      <div class="clip-meta"><span>The Washington Post</span><span>30 September 2025</span><span class="lang">EN</span></div>
+      <div class="clip-meta"><span>The Washington Post</span><span class="lang-en">30 September 2025</span><span class="lang-de">30. September 2025</span><span class="lang">EN</span></div>
       <p class="clip-title"><a href="https://www.washingtonpost.com/world/2025/09/30/germany-oldest-bratwurst-sausage-boxing/">In Germany, a boxing match decides fight over birthplace of bratwurst</a></p>
     </li>
 
     <li class="clip">
-      <div class="clip-meta"><span>The Washington Post</span><span>5 August 2025</span><span class="lang">EN</span></div>
+      <div class="clip-meta"><span>The Washington Post</span><span class="lang-en">5 August 2025</span><span class="lang-de">5. August 2025</span><span class="lang">EN</span></div>
       <p class="clip-title"><a href="https://www.washingtonpost.com/world/2025/08/05/germany-trains-delays-broken-railroad/">Germany's identity crisis: The trains no longer run on time</a></p>
     </li>
 
     <li class="clip">
-      <div class="clip-meta"><span>The Washington Post</span><span>13 March 2025</span><span class="lang">EN</span></div>
+      <div class="clip-meta"><span>The Washington Post</span><span class="lang-en">13 March 2025</span><span class="lang-de">13. M&auml;rz 2025</span><span class="lang">EN</span></div>
       <p class="clip-title"><a href="https://www.washingtonpost.com/dc-md-va/2025/03/13/federal-workers-return-to-office-trump-confusion/">Federal workers called back to the office &mdash; or is it a shuttered Subway?</a></p>
-      <p class="byline-note">With Hannah Natanson</p>
+      <p class="byline-note"><span class="lang-en">With Hannah Natanson</span><span class="lang-de">Mit Hannah Natanson</span></p>
     </li>
 
     <li class="clip">
-      <div class="clip-meta"><span>The Washington Post</span><span>15 February 2025</span><span class="lang">EN</span></div>
+      <div class="clip-meta"><span>The Washington Post</span><span class="lang-en">15 February 2025</span><span class="lang-de">15. Februar 2025</span><span class="lang">EN</span></div>
       <p class="clip-title"><a href="https://www.washingtonpost.com/dc-md-va/2025/02/15/return-to-office-mandate-trump-desks/">Federal return-to-office mandate breeds chaos, confusion &mdash; and coin flips</a></p>
     </li>
 
     <li class="clip">
-      <div class="clip-meta"><span>Mother Jones</span><span>29 December 2016</span><span class="lang">EN</span></div>
+      <div class="clip-meta"><span>Mother Jones</span><span class="lang-en">29 December 2016</span><span class="lang-de">29. Dezember 2016</span><span class="lang">EN</span></div>
       <p class="clip-title"><a href="https://www.motherjones.com/politics/2016/12/hawaii-micronesia-migration-homeless-climate-change/">America's Real Migrant Crisis Is the One You've Never Heard Of</a></p>
     </li>
 
     <li class="clip">
-      <div class="clip-meta"><span>Washington City Paper</span><span>14 March 2014</span><span class="lang">EN</span></div>
+      <div class="clip-meta"><span>Washington City Paper</span><span class="lang-en">14 March 2014</span><span class="lang-de">14. M&auml;rz 2014</span><span class="lang">EN</span></div>
       <p class="clip-title"><a href="https://washingtoncitypaper.com/article/205165/no-place-like-home/">No Place Like Home</a></p>
     </li>
 
@@ -368,38 +411,38 @@ footer{
      AWARDS
      ============================================================ -->
 <section id="awards">
-  <h2>Awards &amp; Recognition</h2>
+  <h2><span class="lang-en">Awards &amp; Recognition</span><span class="lang-de">Auszeichnungen</span></h2>
 
   <ul class="awards measure-wide">
 
     <li class="award">
       <div class="award-year">2026</div>
-      <div class="award-body"><strong>Pulitzer Prize for Public Service.</strong> A small part of a big reporting team that won for coverage of Donald Trump's assault on the federal workforce.</div>
+      <div class="award-body"><span class="lang-en"><strong>Pulitzer Prize for Public Service.</strong> A small part of a big reporting team that won for coverage of Donald Trump's assault on the federal workforce.</span><span class="lang-de"><strong>Pulitzer Prize for Public Service.</strong> Als kleiner Teil eines gro&szlig;en Rechercheteams ausgezeichnet f&uuml;r die Berichterstattung &uuml;ber Donald Trumps Angriff auf den &ouml;ffentlichen Dienst.</span></div>
     </li>
 
     <li class="award">
       <div class="award-year">2026</div>
-      <div class="award-body"><strong>Arthur F. Burns Prize</strong> for reporting on links between the Trump administration and Germany's far-right Alternative for Germany party.</div>
+      <div class="award-body"><span class="lang-en"><strong>Arthur F. Burns Prize</strong> for reporting on links between the Trump administration and Germany's far-right Alternative for Germany party.</span><span class="lang-de"><strong>Arthur F. Burns Preis</strong> f&uuml;r die Berichterstattung &uuml;ber Verbindungen zwischen der Trump-Regierung und der rechtsextremen Alternative f&uuml;r Deutschland.</span></div>
     </li>
 
     <li class="award">
       <div class="award-year">2024</div>
-      <div class="award-body"><strong>Pulitzer Prize finalist</strong>, Illustrated Reporting and Commentary. Co-editor of an investigation into the Smithsonian's collection of human remains.</div>
+      <div class="award-body"><span class="lang-en"><strong>Pulitzer Prize finalist</strong>, Illustrated Reporting and Commentary. Co-editor of an investigation into the Smithsonian's collection of human remains.</span><span class="lang-de"><strong>Finalist, Pulitzer Prize for Illustrated Reporting and Commentary.</strong> Als Co-Redakteur einer Recherche &uuml;ber die Sammlung menschlicher &Uuml;berreste am Smithsonian.</span></div>
     </li>
 
     <li class="award">
       <div class="award-year">2015</div>
-      <div class="award-body"><strong>Association of Alternative Newsmedia Award</strong> for beat reporting.</div>
+      <div class="award-body"><span class="lang-en"><strong>Association of Alternative Newsmedia Award</strong> for beat reporting.</span><span class="lang-de"><strong>Association of Alternative Newsmedia Award</strong> f&uuml;r Beat Reporting.</span></div>
     </li>
 
     <li class="award">
       <div class="award-year">2014</div>
-      <div class="award-body"><strong>Association of Alternative Newsmedia Award</strong> for blogging.</div>
+      <div class="award-body"><span class="lang-en"><strong>Association of Alternative Newsmedia Award</strong> for blogging.</span><span class="lang-de"><strong>Association of Alternative Newsmedia Award</strong> f&uuml;r Blogging.</span></div>
     </li>
 
     <li class="award">
       <div class="award-year">2011</div>
-      <div class="award-body"><strong>Arthur F. Burns Prize</strong> for reporting on Germany's rushed energy transition.</div>
+      <div class="award-body"><span class="lang-en"><strong>Arthur F. Burns Prize</strong> for reporting on Germany's rushed energy transition.</span><span class="lang-de"><strong>Arthur F. Burns Preis</strong> f&uuml;r die Berichterstattung &uuml;ber Deutschlands &uuml;berst&uuml;rzte Energiewende.</span></div>
     </li>
 
   </ul>
@@ -409,34 +452,34 @@ footer{
      CONTACT
      ============================================================ -->
 <section id="contact">
-  <h2>Contact</h2>
+  <h2><span class="lang-en">Contact</span><span class="lang-de">Kontakt</span></h2>
 
-  <p class="measure" style="margin-bottom:2rem">For freelance writing projects, media engagements, public speaking, book ideas, or random chitchat:</p>
+  <p class="measure" style="margin-bottom:2rem"><span class="lang-en">For freelance writing projects, media engagements, public speaking, book ideas, or random chitchat:</span><span class="lang-de">F&uuml;r freie Textauftr&auml;ge, Medienauftritte, Vortr&auml;ge, Buchideen oder einfach zum Plaudern:</span></p>
 
   <ul class="contact-list measure-wide">
     <li>
-      <span class="contact-label">Email</span>
+      <span class="contact-label"><span class="lang-en">Email</span><span class="lang-de">E-Mail</span></span>
       <span><a href="mailto:aaron.m.wiener@gmail.com">aaron.m.wiener@gmail.com</a></span>
     </li>
     <li>
       <span class="contact-label">Signal</span>
       <span>@aaronwiener.37</span>
     </li>
-    <li>
-      <span class="contact-label">German agent</span>
-      <span>Thomas Schmoll &middot; <a href="mailto:tommy.schmoll.buero@gmail.com">tommy.schmoll.buero@gmail.com</a></span>
-    </li>
-    <li>
-      <span class="contact-label">U.S. agent</span>
-      <span>Anna Sproul-Latimer, Neon Literary &middot; <a href="mailto:anna@neonliterary.com">anna@neonliterary.com</a></span>
-    </li>
-    <li>
-      <span class="contact-label">Bluesky</span>
-      <span><a href="https://bsky.app/profile/aaronwiener.bsky.social">@aaronwiener.bsky.social</a></span>
+    <li class="lang-de">
+      <span class="contact-label">Buchagent</span>
+      <span>Thomas Schmoll &middot; <a href="mailto:thomas.schmoll.info@gmail.com">thomas.schmoll.info@gmail.com</a></span>
     </li>
     <li>
       <span class="contact-label">X</span>
       <span><a href="https://x.com/aaronwiener">@aaronwiener</a></span>
+    </li>
+    <li>
+      <span class="contact-label">LinkedIn</span>
+      <span><a href="https://www.linkedin.com/in/aawiener/">linkedin.com/in/aawiener</a></span>
+    </li>
+    <li>
+      <span class="contact-label">Bluesky</span>
+      <span><a href="https://bsky.app/profile/aaronwiener.bsky.social">@aaronwiener.bsky.social</a></span>
     </li>
   </ul>
 </section>
@@ -447,7 +490,26 @@ footer{
   &copy; <span id="year">2026</span> Aaron Wiener
 </footer>
 
-<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+
+(function(){
+  var root=document.documentElement;
+  var btns=document.querySelectorAll('.lang-btn');
+  function set(l){
+    root.setAttribute('data-lang',l);
+    root.setAttribute('lang',l);
+    for(var i=0;i<btns.length;i++){
+      btns[i].setAttribute('aria-current', btns[i].getAttribute('data-set-lang')===l ? 'true':'false');
+    }
+    try{localStorage.setItem('aw-lang',l)}catch(e){}
+  }
+  for(var i=0;i<btns.length;i++){
+    (function(b){b.addEventListener('click',function(){set(b.getAttribute('data-set-lang'))})})(btns[i]);
+  }
+  set(root.getAttribute('data-lang')||'en');
+})();
+</script>
 
 </body>
 </html>
