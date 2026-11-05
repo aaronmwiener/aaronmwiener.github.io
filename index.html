@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aaron Wiener — Reporter, Editor, Author</title>
-<meta name="description" content="Aaron Wiener is an award-winning reporter, editor, and author based in Berlin. Former Berlin bureau chief of the Washington Post.">
+<meta name="description" content="Aaron Wiener is an award-winning reporter, editor, and author based in Berlin. Former Berlin bureau chief of the Washington Post. His first book, Post Mortem, is out March 10, 2027.">
 
 <!-- ===== Social sharing preview. Replace the URL below once the site is live. ===== -->
 <meta property="og:title" content="Aaron Wiener">
-<meta property="og:description" content="Reporter, editor, and author based in Berlin.">
+<meta property="og:description" content="Reporter, editor, and author based in Berlin. Author of Post Mortem, out March 10, 2027.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aaronmwiener.com">
 
@@ -182,6 +182,28 @@ p:last-child{margin-bottom:0}
 }
 
 /* ---------- Book ---------- */
+.book-grid{
+  display:grid;
+  grid-template-columns:15rem 1fr;
+  gap:3.2rem;
+  align-items:start;
+}
+.book-text{max-width:37rem}
+.book-cover{margin:0}
+.book-cover img{
+  width:100%;height:auto;display:block;
+  border:1px solid var(--rule);
+  box-shadow:0 2px 14px rgba(20,23,28,.10);
+}
+.book-cover figcaption{
+  font-family:var(--mono);font-size:.62rem;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-top:.7rem;
+}
+@media(max-width:56rem){
+  .book-grid{grid-template-columns:1fr;gap:2rem}
+  .book-cover{max-width:15rem}
+}
 .book-meta{
   font-family:var(--mono);font-size:.74rem;color:var(--muted);
   letter-spacing:.05em;margin:0 0 1.6rem;line-height:1.7;
@@ -359,11 +381,26 @@ html[data-lang="de"] li.lang-de{display:grid}
 <!-- ============================================================
      THE BOOK  —  edit this section as news firms up
      ============================================================ -->
-<section id="book" class="measure">
+<section id="book">
   <h2><span class="lang-en">The Book</span><span class="lang-de">Das Buch</span></h2>
 
-  <p class="lang-en">Aaron is working on a book about billionaires and the media, and the state of press freedom in the United States and Europe. It will be published this spring in Germany by Goldmann Verlag, a Penguin Random House imprint. Stay tuned for more details.</p>
-  <p class="lang-de">Aaron arbeitet an einem Buch &uuml;ber Milliard&auml;re und die Medien und &uuml;ber den Zustand der Pressefreiheit in den USA und in Europa. Es erscheint im kommenden Fr&uuml;hjahr in Deutschland bei Goldmann, einem Imprint von Penguin Random House. Weitere Details folgen.</p>
+  <div class="book-grid">
+
+    <figure class="book-cover">
+      <img src="book-cover.jpg" alt="Post Mortem — Der Fall Washington Post: Wie Milliard&auml;re unsere freie Presse zerst&ouml;ren">
+      <figcaption><span class="lang-en">German edition &middot; Goldmann</span><span class="lang-de">Deutsche Ausgabe &middot; Goldmann</span></figcaption>
+    </figure>
+
+    <div class="book-text">
+
+      <p class="lang-en">Aaron's first book, <em>Post Mortem</em>, will be published on March 10, 2027, in Germany by Goldmann Verlag, a Penguin Random House imprint. The book is about billionaire ownership of the media, and how the billionaires seen as saviors of newspapers and magazines when they bought them last decade became problematic owners when their financial and political interests came into conflict with journalistic principles. It focuses on the rise and fall of The Washington Post under Jeff Bezos but also examines other media institutions on both sides of the Atlantic.</p>
+      <p class="lang-de">Aarons erstes Buch, <em>Post Mortem</em>, erscheint am 10. M&auml;rz 2027 in Deutschland bei Goldmann, einem Imprint von Penguin Random House. Es handelt davon, wie Milliard&auml;re die Medien &uuml;bernommen haben &ndash; und wie aus den vermeintlichen Rettern, die im vergangenen Jahrzehnt Zeitungen und Zeitschriften aufkauften, problematische Eigent&uuml;mer wurden, sobald ihre finanziellen und politischen Interessen mit journalistischen Grunds&auml;tzen kollidierten. Im Zentrum steht der Aufstieg und Fall der Washington Post unter Jeff Bezos, daneben nimmt das Buch weitere Medienh&auml;user auf beiden Seiten des Atlantiks in den Blick.</p>
+
+      <p class="lang-en">Stay tuned for more information about U.S. and international editions.</p>
+      <p class="lang-de">Weitere Informationen zu einer US-amerikanischen und internationalen Ausgabe folgen.</p>
+
+    </div>
+  </div>
 </section>
 
 <!-- ============================================================
